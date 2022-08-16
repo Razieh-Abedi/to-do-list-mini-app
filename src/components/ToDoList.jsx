@@ -13,13 +13,9 @@ function ToDoList({ id, task, time, deleteClick }) {
     </button>
   );
   const editInputStyle = editInput ? (
-    <input
-      type="text"
-      className="border rounded bg-light p-2 mx-3"
-      placeholder={task}
-    />
+    <input type="text" className="border rounded bg-light" placeholder={task} />
   ) : (
-    <p className="border rounded bg-light p-2 mx-3">{task}</p>
+    <p className="border rounded bg-light p-2">{task}</p>
   );
   const clickEdit = () => {
     setEditinput(!editInput);
@@ -43,14 +39,11 @@ function ToDoList({ id, task, time, deleteClick }) {
   return (
     <div
       id={id}
-      className="d-flex justify-content-between border border-warning border-1 rounded my-2"
+      className="d-flex justify-content-between align-items-center border border-1 rounded my-2 pt-3 px-2"
     >
-      <div className="d-flex justify-content-evenly">
-        {editInputStyle}
-        <p className="border rounded bg-light p-2 mx-3">{time}</p>
-      </div>
-      <div className="">
-        <ul className="">
+      <div>{editInputStyle}</div>
+      <div>
+        <ul>
           <li className="d-inline ps-2" onClick={doneClick}>
             {doneBtnStyle}
           </li>

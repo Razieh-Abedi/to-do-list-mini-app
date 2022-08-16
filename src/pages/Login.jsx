@@ -2,7 +2,8 @@ import React from "react";
 import { Facebook, Twitter, Google } from "react-bootstrap-icons";
 function Login() {
   return (
-    <div className="container w-25 my-5 text-center">
+    <div className="container w-25 my-5 text-center bg-light shadow shadow-sm">
+      <h2>Log in</h2>
       <form>
         <div className="form-outline mb-4">
           <input type="email" id="form2Example1" className="form-control" />

@@ -11,7 +11,6 @@ function EditList() {
     { id: "task6", task: "Finish the project", time: "Friday" },
   ];
   //To delete an item form the task list
-  // const newTaskList = taskList.filter(item => item.id !==id)
   const [toDoList, setToDoList] = useState(taskList);
   const deleteClick = (id) => {
     setToDoList(toDoList.filter((item) => item.id !== id));
@@ -21,14 +20,10 @@ function EditList() {
     <div>
       <div className="todosList">
         <div className="container">
-          <div className="row">
-            <div className="col">
-              <button>Done</button>
-              <div className="col">
-                <button>Not Done</button>
-              </div>
-            </div>
-          </div>
+          <ul>
+            <li className="d-inline list-unstyled"><button className="btn btn-primary ms-2">Done</button></li>
+            <li className="d-inline list-unstyled"><button className="btn btn-primary ms-2">Not Done</button></li>
+          </ul>
         </div>
       </div>
       <div className="container my-3">

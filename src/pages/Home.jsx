@@ -4,7 +4,7 @@ import EditList from "../components/EditList";
 
 function Home() {
   return (
-    <div>
+    <div className="py-4">
       <AddToList />
       <EditList />
     </div>
