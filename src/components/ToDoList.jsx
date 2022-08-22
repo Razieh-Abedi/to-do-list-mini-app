@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-function ToDoList({ id, task, time, deleteClick }) {
+function ToDoList({ id, task, deleteClick, submitClick }) {
   //to edit the task when click on edit   and to hide edit and show submit when clicked on edit
   const [editInput, setEditinput] = useState(false);
   const [editBtn, setEditBtn] = useState(false);
-  const editBtnStyle = editBtn ? (
-    <button type="button" className="btn btn-warning btn-sm ms-1">
-      Submit
-    </button>
-  ) : (
-    <button type="button" className="btn btn-info btn-sm ms-1">
-      Edit
-    </button>
-  );
+  // const editBtnStyle = editBtn ? (
+  //   <button type="button" className="btn btn-warning btn-sm ms-1">
+  //     Submit
+  //   </button>
+  // ) : (
+  //   <button type="button" className="btn btn-info btn-sm ms-1">
+  //     Edit
+  //   </button>
+  // );
   const editInputStyle = editInput ? (
     <input type="text" className="border rounded bg-light" placeholder={task} />
   ) : (
@@ -33,7 +33,7 @@ function ToDoList({ id, task, time, deleteClick }) {
     </button>
   );
   const doneClick = () => {
-    setDoneBtn(true);
+    setDoneBtn(!doneBtn);
   };
 
   return (
@@ -47,8 +47,24 @@ function ToDoList({ id, task, time, deleteClick }) {
           <li className="d-inline ps-2" onClick={doneClick}>
             {doneBtnStyle}
           </li>
-          <li className="d-inline ps-2" onClick={clickEdit}>
-            {editBtnStyle}
+          <li className="d-inline ps-2">
+            {editBtn ? (
+              <button
+                onClick={() => submitClick(id)}
+                type="button"
+                className="btn btn-warning btn-sm ms-1"
+              >
+                Submit
+              </button>
+            ) : (
+              <button
+                onClick={clickEdit}
+                type="button"
+                className="btn btn-info btn-sm ms-1"
+              >
+                Edit
+              </button>
+            )}
           </li>
           <li className="d-inline ps-2">
             <button

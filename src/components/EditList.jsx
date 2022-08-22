@@ -1,28 +1,40 @@
 import React, { useState } from "react";
 import ToDoList from "./ToDoList";
+import taskList from "../data/todoData";
 
 function EditList() {
-  let taskList = [
-    { id: "task1", task: "Get the car fixed", time: "Monday" },
-    { id: "task2", task: "Do the grocerry shopping", time: "Tuesday morning" },
-    { id: "task3", task: "Meet with mother", time: "Tuesday afternoon" },
-    { id: "task4", task: "Email the prof", time: "Wednesday" },
-    { id: "task5", task: "Go hiking", time: "Thursday" },
-    { id: "task6", task: "Finish the project", time: "Friday" },
-  ];
   //To delete an item form the task list
   const [toDoList, setToDoList] = useState(taskList);
-  const deleteClick = (id) => {
-    setToDoList(toDoList.filter((item) => item.id !== id));
-  };
 
+  const deleteClick = (id) => {
+    //id=3
+    // const targetTodo= toDoList.find((item) => item.id ===id)
+    // targetTodo.task="sssss"
+
+    const newTodoList = toDoList.filter((item) => item.id !== id);
+
+    setToDoList(newTodoList);
+    // setToDoList([...newTodoList, targetTodo]);
+  };
+  //To edit a task and submit it
+  const submitClick = (id) => {
+    const targetTodo = toDoList.find((item) => item.id === id);
+    targetTodo.task= toDoList.map((item)=>("task modified"))
+    const newTodoList = toDoList.filter((item) => item.id !== id);
+    setToDoList( [...newTodoList, targetTodo]);
+  };
+  
   return (
     <div>
       <div className="todosList">
         <div className="container">
           <ul>
-            <li className="d-inline list-unstyled"><button className="btn btn-primary ms-2">Done</button></li>
-            <li className="d-inline list-unstyled"><button className="btn btn-primary ms-2">Not Done</button></li>
+            <li className="d-inline list-unstyled">
+              <button className="btn btn-primary ms-2">Done</button>
+            </li>
+            <li className="d-inline list-unstyled">
+              <button className="btn btn-primary ms-2">Not Done</button>
+            </li>
           </ul>
         </div>
       </div>
@@ -34,6 +46,7 @@ function EditList() {
                 key={item.id}
                 {...item}
                 deleteClick={deleteClick}
+                submitClick={submitClick}
               ></ToDoList>
             ))}
           </div>
