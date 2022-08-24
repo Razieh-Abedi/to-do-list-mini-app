@@ -2,7 +2,7 @@
   "name": "to-do-list-mini-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://Razieh-Abedi.github.io/to-do-list-mini-app",
+  "homepage": "http://Razieh-Abedi.github.io/to-do-list-mini-app/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
