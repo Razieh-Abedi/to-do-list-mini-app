@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import ToDoList from "./ToDoList";
-import taskList from "../data/todoData";
+import TodoCard from "./TodoCard";
+import taskList from "../../data/todoData";
+import EditTodoCard from "./EditTodoCard";
 
-function EditList() {
+function TodoList(newTask) {
+ 
+  
   //To delete an item form the task list
   const [toDoList, setToDoList] = useState(taskList);
+
+  
 
   const deleteClick = (id) => {
     //id=3
@@ -17,11 +22,12 @@ function EditList() {
     // setToDoList([...newTodoList, targetTodo]);
   };
   //To edit a task and submit it
-  const submitClick = (id) => {
+  const submitClick = (id, textEdited) => {
     const targetTodo = taskList.find((item) => item.id === id);
     // targetTodo.task= toDoList.map((item)=>("task modified"))
-    targetTodo.task = "sssss";
+    targetTodo.task = textEdited;
     const newTodoList = toDoList.filter((item) => item.id !== id);
+    
     setToDoList([...newTodoList, targetTodo]);
   };
 
@@ -42,18 +48,21 @@ function EditList() {
       <div className="container my-3">
         <div className="row">
           <div className="col">
-            {toDoList.map((item) => (
-              <ToDoList
-                key={item.id}
-                {...item}
-                deleteClick={deleteClick}
-                submitClick={submitClick}
-              ></ToDoList>
-            ))}
+            {toDoList.map((item) =>
+             
+                <TodoCard
+                  key={item.id}
+                  {...item}
+                  deleteClick={deleteClick}
+                  
+                  submitClick={submitClick}
+                ></TodoCard>
+              )
+            }
           </div>
         </div>
       </div>
     </div>
   );
 }
-export default EditList;
+export default TodoList;

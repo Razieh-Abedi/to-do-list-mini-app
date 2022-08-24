@@ -1,6 +1,12 @@
-import React from "react";
+import {useState} from "react";
 import { Facebook, Twitter, Google } from "react-bootstrap-icons";
 function Login() {
+  const [userInfo, setUserInfo] = useState({
+    email:"",
+    password:""
+  })
+
+  
   return (
     <div className="container w-25 my-5 text-center bg-light shadow shadow-sm">
       <h2>Log in</h2>
