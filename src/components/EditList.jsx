@@ -18,12 +18,13 @@ function EditList() {
   };
   //To edit a task and submit it
   const submitClick = (id) => {
-    const targetTodo = toDoList.find((item) => item.id === id);
-    targetTodo.task= toDoList.map((item)=>("task modified"))
+    const targetTodo = taskList.find((item) => item.id === id);
+    // targetTodo.task= toDoList.map((item)=>("task modified"))
+    targetTodo.task = "sssss";
     const newTodoList = toDoList.filter((item) => item.id !== id);
-    setToDoList( [...newTodoList, targetTodo]);
+    setToDoList([...newTodoList, targetTodo]);
   };
-  
+
   return (
     <div>
       <div className="todosList">
