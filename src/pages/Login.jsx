@@ -1,26 +1,28 @@
 import { useState } from "react";
 import { Facebook, Twitter, Google } from "react-bootstrap-icons";
+
 function Login() {
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
   });
-  const [updatedUserInfo, setUpdatedUserInfo] = useState(userInfo);
-  const singinClicked = (updatedUserInfo) => {
-    setUpdatedUserInfo([...userInfo, ...updatedUserInfo]);
-    console.log(updatedUserInfo);
+
+  const singinClicked = () => {
+   
+    console.log(userInfo);
   };
 
   return (
     <div className="container w-25 my-5 text-center bg-light shadow shadow-sm">
       <h2>Log in</h2>
-      <form>
+      
+      <form >
         <div className="form-outline mb-4">
           <input
             type="email"
             id="email"
             value={userInfo.email}
-            onChange={(e) => setUserInfo(e.target.value)}
+            onChange={(e) => setUserInfo( {...userInfo, email:e.target.value} )}
             className="form-control"
           />
           <label className="form-label" for="email">
@@ -34,7 +36,7 @@ function Login() {
             id="password"
             className="form-control"
             value={userInfo.password}
-            onChange={(e) => setUserInfo(e.target.value)}
+            onChange={(e) => setUserInfo({...userInfo, password:e.target.value})}
           />
           <label className="form-label" for="password">
             Password

@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 // import taskList from "../../data/todoData";
-function AddToList({ task, addClicked }) {
+function AddToList({ addClicked }) {
   // To add a task to the list
-  const [newTask, setNewTask] = useState(task);
+  const [newText, setNewText] = useState("");
+
+  const AddTask = (e) => {
+    e.preventDefault();
+    addClicked(newText);
+    setNewText("");
+  };
 
   return (
     <section className="bg-light mb-3">
@@ -12,16 +18,17 @@ function AddToList({ task, addClicked }) {
           To get started, add some items to your list:
         </p>
 
-        <form className="">
+        <form className="" onSubmit={AddTask}>
           <div className="d-flex">
             <input
+              name="task"
               type="text"
               className="form-control mx-sm-3"
               placeholder="I want to do ..."
-              value={newTask}
-              onChange={(e) => setNewTask(e.target.value)}
+              value={newText}
+              onChange={(e) => setNewText(e.target.value)}
             />
-            <button className="btn btn-primary" onClick={addClicked}>
+            <button type="submit" className="btn btn-primary" >
               Add
             </button>
           </div>

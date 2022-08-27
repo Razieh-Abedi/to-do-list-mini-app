@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import TodoCard from "./TodoCard";
 import taskList from "../../data/todoData";
+import AddToList from "./AddToList";
 
 function TodoList(newTask) {
   //To delete an item form the task list
   const [toDoList, setToDoList] = useState(taskList);
+
   const deleteClick = (id) => {
     const newTodoList = toDoList.filter((item) => item.id !== id);
     setToDoList(newTodoList);
@@ -16,18 +18,21 @@ function TodoList(newTask) {
     const newTodoList = toDoList.filter((item) => item.id !== id);
     setToDoList([...newTodoList, targetTodo]);
   };
-  // To set the new task list
-  const [newTaskList, setNewTaskList] = useState({
-    id: taskList.id,
-    task: taskList.task,
-  });
-  const addClicked = () => {
+ 
+  const addClicked = (newText) => {
     // setNewTaskList(newTaskList.push(newTask));
-    setNewTaskList(...taskList, ...newTaskList);
+  
+  setToDoList([{ id: Date.now(),task: newText},...toDoList ])
+  
   };
+
+  
 
   return (
     <div>
+      <div className="py-4">
+      <AddToList   addClicked={addClicked} />
+      </div>
       <div className="container">
         <ul>
           <li className="d-inline list-unstyled">
@@ -47,7 +52,7 @@ function TodoList(newTask) {
                 {...item}
                 deleteClick={deleteClick}
                 submitClick={submitClick}
-                addClicked={addClicked}
+               
               ></TodoCard>
             ))}
           </div>
