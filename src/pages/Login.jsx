@@ -1,26 +1,42 @@
-import {useState} from "react";
+import { useState } from "react";
 import { Facebook, Twitter, Google } from "react-bootstrap-icons";
 function Login() {
   const [userInfo, setUserInfo] = useState({
-    email:"",
-    password:""
-  })
+    email: "",
+    password: "",
+  });
+  const [updatedUserInfo, setUpdatedUserInfo] = useState(userInfo);
+  const singinClicked = (updatedUserInfo) => {
+    setUpdatedUserInfo([...userInfo, ...updatedUserInfo]);
+    console.log(updatedUserInfo);
+  };
 
-  
   return (
     <div className="container w-25 my-5 text-center bg-light shadow shadow-sm">
       <h2>Log in</h2>
       <form>
         <div className="form-outline mb-4">
-          <input type="email" id="form2Example1" className="form-control" />
-          <label className="form-label" for="form2Example1">
+          <input
+            type="email"
+            id="email"
+            value={userInfo.email}
+            onChange={(e) => setUserInfo(e.target.value)}
+            className="form-control"
+          />
+          <label className="form-label" for="email">
             Email address
           </label>
         </div>
 
         <div className="form-outline mb-4">
-          <input type="password" id="form2Example2" className="form-control" />
-          <label className="form-label" for="form2Example2">
+          <input
+            type="password"
+            id="password"
+            className="form-control"
+            value={userInfo.password}
+            onChange={(e) => setUserInfo(e.target.value)}
+          />
+          <label className="form-label" for="password">
             Password
           </label>
         </div>
@@ -47,7 +63,11 @@ function Login() {
           </div>
         </div>
 
-        <button type="button" className="btn btn-primary btn-block mb-4">
+        <button
+          type="button"
+          className="btn btn-primary btn-block mb-4"
+          onClick={singinClicked}
+        >
           Sign in
         </button>
 

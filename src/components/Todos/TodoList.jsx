@@ -17,14 +17,15 @@ function TodoList(newTask) {
     setToDoList([...newTodoList, targetTodo]);
   };
   // To set the new task list
-  const [newTaskList, setNewTaskList] = useState(taskList);
+  const [newTaskList, setNewTaskList] = useState({
+    id: taskList.id,
+    task: taskList.task,
+  });
   const addClicked = () => {
-    setNewTaskList(newTaskList.push(newTask));
+    // setNewTaskList(newTaskList.push(newTask));
+    setNewTaskList(...taskList, ...newTaskList);
   };
-  // const [NewTodoCard, setNewTodoCard] = useState(TodoCard);
-  // const newCard = ()=> {
-  //   setNewTodoCard(newTaskList)
-  // }
+
   return (
     <div>
       <div className="container">
