@@ -1,13 +1,22 @@
 import React, { useState } from "react";
-// import taskList from "../../data/todoData";
+import addTodoValidation from "../../utils/validation/addTodoValidation";
+
 function AddToList({ addClicked }) {
   // To add a task to the list
   const [newText, setNewText] = useState("");
+  const [errorList, setErrorList] =useState([]);
 
   const AddTask = (e) => {
     e.preventDefault();
-    addClicked(newText);
-    setNewText("");
+
+   setErrorList(addTodoValidation(newText))
+
+    if (!errorList.length) {
+      addClicked(newText)
+      setNewText("");
+    }
+    
+    
   };
 
   return (
@@ -17,7 +26,16 @@ function AddToList({ addClicked }) {
         <p className="lead text-muted">
           To get started, add some items to your list:
         </p>
-
+        
+        {
+          errorList.length?
+          <ul className="alert alert-danger">
+           { errorList.map(item=> <li>{item}</li>)}
+          </ul>
+          :
+          ""
+        }
+        
         <form className="" onSubmit={AddTask}>
           <div className="d-flex">
             <input
@@ -28,6 +46,7 @@ function AddToList({ addClicked }) {
               value={newText}
               onChange={(e) => setNewText(e.target.value)}
             />
+           
             <button type="submit" className="btn btn-primary" >
               Add
             </button>

@@ -43,7 +43,7 @@ function TodoCard({ id, task, deleteClick, submitClick }) {
                   Cancel
                 </button>
               </li>
-              <li>
+              <li className="d-inline ps-2">
                 <button
                   onClick={() => {
                     submitClick(id, textEdited);

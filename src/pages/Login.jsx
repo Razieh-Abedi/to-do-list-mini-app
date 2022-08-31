@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Facebook, Twitter, Google } from "react-bootstrap-icons";
+import loginValidation from "../utils/validation/loginValidation";
 
 function Login() {
   const [userInfo, setUserInfo] = useState({
@@ -7,40 +8,75 @@ function Login() {
     password: "",
   });
 
-  const singinClicked = () => {
-   
-    console.log(userInfo);
+  const [errorList, setErrorList] = useState([]);
+
+  const singinClicked = (e) => {
+    e.preventDefault();
+
+    setErrorList(loginValidation(userInfo));
+    console.log(errorList);
+
+    if (!errorList.length) {
+      console.log(userInfo);
+      setUserInfo({ email: "", password: "" });
+    }
+    
+  };
+
+  const displayErrors = (inputName) => {
+    const inputErrorList = errorList.filter((item) => item.input == inputName);
+
+    return inputErrorList.length ? (
+      <ul className="alert alert-danger">
+        {inputErrorList.map((item) =>
+          item.input === inputName ? <li>{item.message}</li> : ""
+        )}
+      </ul>
+    ) : (
+      ""
+    );
   };
 
   return (
     <div className="container w-25 my-5 text-center bg-light shadow shadow-sm">
       <h2>Log in</h2>
-      
-      <form >
+
+      <form onSubmit={singinClicked}>
         <div className="form-outline mb-4">
+        <label className="form-label" for="email">
+            Email address
+          </label>
           <input
             type="email"
             id="email"
             value={userInfo.email}
-            onChange={(e) => setUserInfo( {...userInfo, email:e.target.value} )}
+            onChange={(e) =>
+              setUserInfo({ ...userInfo, email: e.target.value })
+            }
             className="form-control"
           />
-          <label className="form-label" for="email">
-            Email address
-          </label>
+        
+          <div>
+            {displayErrors("email")}
+          </div>
         </div>
 
         <div className="form-outline mb-4">
+        <label className="form-label" for="password">
+            Password
+          </label>
           <input
             type="password"
             id="password"
             className="form-control"
             value={userInfo.password}
-            onChange={(e) => setUserInfo({...userInfo, password:e.target.value})}
+            onChange={(e) =>
+              setUserInfo({ ...userInfo, password: e.target.value })
+            }
           />
-          <label className="form-label" for="password">
-            Password
-          </label>
+          <div>
+            {displayErrors("password")}
+          </div>
         </div>
 
         <div className="row mb-4">
@@ -65,11 +101,7 @@ function Login() {
           </div>
         </div>
 
-        <button
-          type="button"
-          className="btn btn-primary btn-block mb-4"
-          onClick={singinClicked}
-        >
+        <button type="submit" className="btn btn-primary btn-block mb-4">
           Sign in
         </button>
 
@@ -79,7 +111,6 @@ function Login() {
           </p>
           <p>or sign up with:</p>
           <button type="button" className="btn btn-link btn-floating mx-1">
-            {/* <i className="fab fa-facebook-f"></i> */}
             <i class="bi bi-facebook"></i>
             <Facebook />
           </button>

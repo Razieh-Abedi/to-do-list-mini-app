@@ -19,14 +19,9 @@ function TodoList(newTask) {
     setToDoList([...newTodoList, targetTodo]);
   };
  
-  const addClicked = (newText) => {
-    // setNewTaskList(newTaskList.push(newTask));
-  
+  const addClicked = (newText) => { 
   setToDoList([{ id: Date.now(),task: newText},...toDoList ])
-  
   };
-
-  
 
   return (
     <div>
