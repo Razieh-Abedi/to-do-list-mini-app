@@ -11,6 +11,7 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
+        {/* <Route path="/" element={<Home />} /> */}
         <Route path="/to-do-list-mini-app" element={<Home />} />
         <Route path="/" element={<Navigate to="/to-do-list-mini-app" />} />
         <Route path="/login" element={<Login />} />
